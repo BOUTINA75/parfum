@@ -16,6 +16,7 @@ class AddressUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // J'ai fais un formulaire pour les adresses (pour un code postal, je mets un textType si par la suite j'ai envie de faire de l'intertionnale) le coutryType va me permet d'avoir une liste de differente pays par défaut (je veux sauvegarde en base des préfixes pour permetre au utilisateur de sélectionner dans une liste déroulante le preéfixe de leur téléphone donc j'utilise textType) sinon je peux utiliser numberType
         $builder
             ->add('firstname', TextType::class, [
                 'label' => 'Votre prénom',
@@ -59,7 +60,7 @@ class AddressUserType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "Sauvegarder",
                 'attr' => [
-                    'class' => 'btn btn-custom'
+                    'class' => 'btn btn-custom w-100'
                 ]
             ])   
         ;

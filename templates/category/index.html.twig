@@ -4,13 +4,16 @@
 {% block body %}
 
 <div class="container my-5">
+{# Entre chevron je peux mettre ma catégorie et le nom #}
     <h1>{{ category.name }}</h1>
 
-    <p>Cette category contient {{ category.products|length }} produit(s).</p>
+    {# La entre chevron je met ma catégorie et le nombre de produit dans ma catégorie doc twig #}
+    <p>Cette catégorie contient {{ category.products|length }} produit(s).</p>
 
+        {# Je souhaite affiche les produits aux utilisateurs j'utilise la boucle for, je dis a symfony je veux que tu fasse une boucle sur l'essemble des category.product (c'est à dire pour chaque produit qui est dans ta catégorie, tu rentre dans cette boucle et tu fais un affichage) je utilise une div row pour créer des colonnes ( Les colonne de bootstrap fonctionne par douze c'est 3 rentre sur une même ligne 3+3+3+3=12)  #}
         <div class="row">
             {% for product in category.products %}
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 text-center mb-5">
                     <a href="{{ path ('app_product', { slug : product.slug }) }}" class="text-decoration-none">
                         <img src="/uploads/{{ product.illustration }}" class="img-fluid">
                         <span class="b-block fw-bold text-black">{{ product.name }}</span>

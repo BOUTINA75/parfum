@@ -28,14 +28,16 @@ class CategoryCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
+        // (slug est une chain de caractère purifiés, qu'on va pouvoir faire transiter dans nos URL de manière bcp plus propre "SulgField" qui fait exactement ce travail là) setTargetFieldName il a besoin qu'on lui indique quelle est la propriété sur laquelle (j'aimerais ajoute un petit texte en dessous de mes input ce qu'on appelle un helper) 
         return [
             TextField::new('name')->setLabel('Title')->setHelp("Titre de la catégorie"),
             SlugField::new('slug')->setLabel('URL')->setTargetFieldName('name')->setHelp('URL de votre catégorie générée automatiquement')
         ];
 
 
+        // exemple
         // Les Parfums Français -> nom
-        // Les-parfums-français -> slug 
+        // les-parfums-francais -> slug 
     }
     
 }

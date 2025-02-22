@@ -100,6 +100,7 @@ class Product
         return $this;
     }
 
+    // Je vais créer une nouvelle fonction getPriceWt (wt = Wiz Tax) prix avec les taxes, j'ai un coefficient multiplicateur qui ajoute la TVA, je return mon coeff que je multiplie par mon prix
     public function getPriceWt()
     {
         $coeff = 1 + ($this->tva/100);

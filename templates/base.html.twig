@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Florenza Création artisanale - 100% Made in France</title>
     <meta name="description" content="La boutique spécialisée dans la fabrication Made In France">
-
+    
+    {# commande asset retourne le chemin du public paths (dossier public)  qui va lui même contenir les diférents asset si je veux modifier les diférents asset j'aurais pas à le faire partout (regard doc) #}
     <link rel="stylesheet" href="{{ asset ('assets/css/style.css') }}">
 
     <link href="{{ asset ('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -30,6 +31,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
                     </li>
+                    {# allCategories dans cette variable, j'ai l'ensemble de mes objet categories de mon site internet  #}
                     {% for category in allCategories %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path ('app_category', { slug : category.slug}) }}">{{ category.name }}</a>
@@ -40,6 +42,7 @@
                     </li>
                 </ul>
                 <div class="speed-menu">
+                    {#  #}
                     {% if app.user %}
                         <a href="{{ path('app_account') }}"><i data-feather="user"></i> {{ app.user.firstname }}</a>
                     {% else %}
@@ -57,7 +60,9 @@
 </header>
 
 <main>
+    {# je viens créer un container qui va afficher tous les massages sur mes différentes vues  #}
 <div class="container">
+    {# La j'ai une boucle for qui vient chercher tous les messages qui sont stock dans app.flashes(qui stock tous les message flashes) de dans on revient rebouclé sur les message et ensuite on affiche les messages. la class voir la doc bootstrap #}
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="alert mt-4 alert-{{ label }}">
@@ -72,8 +77,8 @@
 {% block body %}{% endblock %}
 
     <!-- FOOTER -->
-    <footer class="btn-custom">
-        <div class="container">
+    <footer class="footer-custum">
+        <div class="container ">
             <div class="row align-items-center">
                 <!-- Colonne 1 : Navigation (à gauche) -->
                 <div class="col-md-4 text-start">

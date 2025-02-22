@@ -7,13 +7,16 @@
 
     <div class="row">
         <div class="col-md-6">
+        {# img-fluid c'est la slasse css de bootstrap qui permet de gérer correctement la largeur de mon image, je m'assure avec cette classe que img-fluid que mon image ne débordera pas de ma colonne md-6 elle va respecter cette largeur #}
             <img src="/uploads/{{ product.illustration }}" class="img-fluid" alt="{{ product.name }}">
         </div>
         <div class="col-md-6">
+            {# Affiche les information de mon produit, j'utilise raw propre a twig pour la déscription pour que les balise html n'apparaise pas cote front doc twig #}
             <small><i><a href="{{ path ('app_category', { slug : product.category.slug } ) }}">{{ product.category.name }}</a> > {{ product.name }}</i></small>
             <h1>{{ product.name }}</h1>
             <span class="d-block mb-3">{{ product.pricewt|price }}</span>
             {{ product.description|raw }}
+            {# donc ce bouton je vais lui mettre lien, je m'es le nom de ma route app_cart_add et elle prend un argument dans l'URL (l'id du produit q'on souhaite ajouté au panier) c'est id que je veux faire transiter et je vais lui mettre en face l'id du produit product.id #}
         <a href="{{ path ('app_cart_add', { id : product.id } ) }}" class="btn btn-custom w-100 mt-3">Ajouter au panier</a>
         </div>
     </div>

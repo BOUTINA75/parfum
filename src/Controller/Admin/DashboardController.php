@@ -20,6 +20,7 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
+        // je souhaite rediriger ver la premier entité disponible (user) pour faire une redirection il me dt qu'il a besoin d'aller chercher l'instance, l'injection de dépendance (AdminUrlGenerator) ensuite il a besoin de nous faire une redirection en utilisant cette instance
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
 
@@ -30,7 +31,9 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('Projetparfum');
     }
+    
 
+    // cettte fonction va nous permettre de gérer les différents menuus de notre interface easyAdmin (méthode statique de la classe menuitem link to crud) qui nous permet de venir créer un nouvel item dans notre menu easyAdmin (le première paramètre de cette méthode statique link to crud, c'est le label, le nom de notre entrée menu. ensuite on a l'icone et ensuite on a l'entité liée)
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');

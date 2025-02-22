@@ -52,9 +52,10 @@ class PasswordUserType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "Mettre à jour mon mot de passe",
                 'attr' => [
-                    'class' => 'btn btn-custom'
+                    'class' => 'btn btn-custom w-100'
                 ]
             ])
+            // La j'ai utiliser des events eventlistener (qui veux dire des moments au quel on veux intervenir avant que sa soie le contreller qui le face pour nous) on viens interface entre le formulaire et le controller a un moment présit (pour cela j'ai choisi mes moment en parcourant mes différent evenement du formulaire disponible) j'ai voulu m'interface au moment du submit (je suis aller cherche mon formulaire ensuite mon user actuel, vérifie l'en codage d'un MDP)
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event){
                 $form =$event->getForm();
                 $user = $form->getConfig()->getOptions()['data'];
@@ -70,7 +71,7 @@ class PasswordUserType extends AbstractType
                 // $actualPwdDtabase = $user->getPassword();
 
                 
-                // 3. Si c'est diférent alors envoyer une erreur 
+                // 3. Si c'est valide on va plus loin sinon tu envoie une erreur 
                 if(!$isValid) {
                     $form->get('actualpassword')->addError(new FormError("Votre mot de passe actuel n'est pas conforme. Veuillez vérifier votre saisie"));
                 }

@@ -10,14 +10,16 @@
             <div class="col-md-3">
                 {% include 'account/_menu.html.twig' %}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 card bg-light-blue">
                 <div class="d-flex justify-content-between">
                     <h5>Mes adresses</h5>
                     <a href="{{ path('app_account_address_form') }}" class="btn btn-light">Ajouter une adresse</a>
                 </div>
+                {# Calculer mon nombre d'adresse et en suite si il y en a 0 à ce moment là affiche moi ce message (je récupérer mais adresse app.user.addresses|length je calcule combien j'ai d'entré == 0 Est-ce que c'est à 0) sinon affiche moi mon adresse #}
                 {% if app.user.addresses|length == 0 %}
                     <p>Vous n'avez pas encore enregistré d'adresse sur Florenza.</p>
                 {% else %}
+                    {# Je mets les paramètre de mes adresse dans une colonne, je rajoute un lien pour que l'utilisateur puisse modifier une adresse qui est disponible dans son compte et un autre lien que pour supprimé l'adresse  #}
                     <div class="row">
                         {% for address in app.user.addresses %}
                             <div class="col-md-4 mt-2">

@@ -2,27 +2,37 @@
 
 {% block body %}
     <div class="container my-5">
-<h1>connexion</h1>
+    <div class="card p-4 bg-light-blue">
+<h1 class="text-center">Connexion</h1>
 
+    {#  #}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-
+{# La commande path permet d'appel une route un chemin (une URL)#}
 <form action="{{ path('app_login') }}" method="post">
     <label for="username">Votre email :</label>
-    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required>
+    <input class="form-control" type="text" id="username" name="_username" placeholder="exemble@gmail.com" value="{{ last_username }}" required>
 
     <label for="password mt-3">Votre mot de passe :</label>
-    <input class="form-control" type="password" id="password" name="_password" required>
-
+    <input class="form-control" type="password" id="password" placeholder="**********" name="_password" required>
+    
+    {# je viens de créer un controller privé(app_account) qui sera afficher uniquement si l'utilisateur est connecte. Si mon utilisateur c'est connecte correctement, je veux que tu me le redirige vert la route app_account #}
     <input type="hidden" name="_target_path" value="{{ path('app_account') }}"> 
 
-    <button type="submit" class="btn btn-custom mt-3">Me connecter</button>
+    <button type="submit" class="btn btn-custom mt-3 w-100">Me connecter</button>
 </form>
-
+    
 <br/>
-Vous n'avez pas de compte ?<a href="{{ path('app_register') }}">Inscrivez-vous</a>
+<div class="d-flex justify-content-between mt-2">
+<div>
+    <p class="d-inline">Vous n'avez pas de compte ?</p>    
+    <a class="d-inline" href="{{ path('app_register') }}">Inscrivez-vous</a>
+</div>
+<a href="{{ path('app_password')}}">Mot de passe oublié</a>
+</div>
 
+    </div>
     </div>
 {% endblock %}

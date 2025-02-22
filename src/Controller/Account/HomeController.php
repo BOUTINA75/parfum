@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-
+    // Le compte de mon utilisateur
     #[Route('/compte', name: 'app_account')]
     public function index(OrderRepository $orderRepository): Response
     {

@@ -11,9 +11,10 @@
             <div class="col-md-3">
                 {% include 'account/_menu.html.twig' %}
             </div>
-            <div class="col-md-9">
-            <h5>Mes adresses</h5>
+            <div class="col-md-9 card bg-light-blue">
+            <h5 class="text-center my-3">Mes adresses</h5>
 
+                {# je gére mes champs indépendamment les uns des autres, je peux manipuler mes input à l'intérieur de ce formulaire  #}
                 {{ form_start(addressForm) }}
                     <div class="row">
                         <div class="col-md-6">{{ form_row(addressForm.firstname) }}</div>

@@ -5,24 +5,25 @@
 <div class="container my-5">
     <h1>Espace membre</h1>
     
-
+        {# Mon menu est place a gauche row permet de créer des colonne #}
         <div class="row">
             <div class="col-md-3">
                 {% include 'account/_menu.html.twig' %}
             </div>
-            <div class="col-md-9">
-            <h5>Modification de mon mot de passe</h5>
+            {# Mon formulaire est place sur la colonne de droite #}
+            <div class="col-md-9 card bg-light-blue">
+            <h5 class="text-center my-3">Modification de mon mot de passe</h5>
             {{ form(modifyPwd) }}
             </div>
         </div>
 
         {# 1. Formulaire
-            1.a : le mot de passe actuel -> comparer avec le mdp en bdd
+            1.a : le mot de passe actuel -> comparer avec le mdp en BDD
             1.b : nouveau mot de passe 
             1.c : confirmation de son nouveau mot de passe
             
             2. Mise à jour en BDD
-            2.a : lui envoyer un prtite notification pour lui confirmer la modification du MDP #}
+            2.a : lui envoyer une petite notification pour lui confirmer la modification du MDP #}
 
 
 </div>

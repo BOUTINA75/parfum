@@ -4,11 +4,12 @@
 {% block body %}
 
     <div class="container my-5">
-        <h1>Mon panier</h1>
+        <h1 class="text-center mb-5">Mon panier</h1>
 
         <div class="row">
 
             <div class="col-md-8">
+                {# Je fais une boucle for en disant pour tous les produits que tu as dans le panier #}
                 {% for product in cart %}
                     <div class="row mt-2">
                             <div class="col-md-2">
@@ -19,7 +20,7 @@
                                 <span class="d-block small">Prix unitaire : {{ product.object.pricewt|price }}</span>
                             </div>
                             <div class="col-md-2 text-right">
-                                <a href="{{ path ('app_cart_decrease', { id : product.object.id } ) }}">-</a><span class="badge text-bg-secondary">x{{ product.qty }}</span><a href="{{ path ('app_cart_add', { id : product.object.id } ) }}">+</a>
+                                <a href="{{ path ('app_cart_decrease', { id : product.object.id } ) }}"><span class="btn btn-outline-dark btn-sm">-</span></a><span class="badge text-bg-secondary m-1">x{{ product.qty }}</span><a href="{{ path ('app_cart_add', { id : product.object.id } ) }}"><span class="btn btn-outline-dark btn-sm">+</span></a>
                             </div>
                             <div class="col-md-2">
                                 <strong>{{ (product.qty * product.object.pricewt)|price }}</strong>

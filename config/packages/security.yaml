@@ -1,6 +1,7 @@
 security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
-    password_hashers:
+    password_hashers: 
+        # Criptage des mot de passe 
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
@@ -14,8 +15,10 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            # j'ai fournie le chemin a symfony pour ce déconnecter
             logout: 
                 path: app_logout
+            # Je vien de dire a symfony voici la route qui va te permet de logué un utilisateur et de check si les identifiant d'un utilisateur son correcte 
             form_login:
                 login_path: app_login
                 check_path: app_login
@@ -31,6 +34,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        # permet de déclaré un chemin une url qui contient une chain de caractére qui associré un role définie (si je veux accède à compte il faut que je soie un user) dés que compte se trouve dans URL vérifie le role de l'utilisateur (il doit etre un role_user)
         - { path: ^/compte, roles: ROLE_USER }
         - { path: ^/commande, roles: ROLE_USER }
         # - { path: ^/admin, roles: ROLE_ADMIN }

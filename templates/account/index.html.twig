@@ -5,36 +5,38 @@
 <div class="container my-5">
     <h1>Espace membre</h1>
 
+        {# row me permet de créer des colonne voir doc bootstrap #}
     <div class="row">
         <div class="col-md-3">
+            {# sa va me permettre tout simplement pour mettre mon menu sur une page de juste avoir a apppel mon fichier en include comme ceci #}
             {% include 'account/_menu.html.twig' %}
         </div>
 
         <div class="col-md-9">
-                <h5>Mes dernières commandes</h5>
+                <h5 class="text-center">Mes dernières commandes</h5>
                 {% if order|length == 0 %}
                     <div class="alert alert-info">
                         Vous n'avez passé aucune commande pour le moment.
                     </div>
                 {% else %}
-                    <table class="table">
+                    <table class="table table">
                     <thead>
-                        <tr>
+                        <tr style="--bs-table-bg: #fbd0d0;">
                             <th scope="col">N°</th>
                             <th scope="col">Date</th>
                             <th scope="col">Statut</th>
                             <th scope="col">Total T.T.C</th>
-                            <th scope="col"></th>
+                            <th scope="col">Détail de la commande</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for order in order %}
                         <tr>
-                            <td>{{ order.id }}</td>
+                            <td class="fw-bold" style="color: #ff9A9A;">{{ order.id }}</td>
                             <td>{{ order.createdAt|date('d/m/y') }}</td>
                             <td>{{ include('admin/state.html.twig', { field : {'value' : order.state} } ) }}</td>
                             <td>{{ order.totalWt|price }}</td>
-                            <td><a href="{{ path('app_account_order', {'id_order' : order.id } ) }}">Voir</a></td>
+                            <td><a class="btn btn-outline-success ms-4" href="{{ path('app_account_order', {'id_order' : order.id } ) }}">Voir les détails</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

@@ -32,6 +32,7 @@ class Category
         $this->products = new ArrayCollection();
     }
 
+    // je dois créer une fonction __toString pour qu'il puisse savoir quel champ il doit rendre (l'idée c'est d'indiquer à l'entité category php et à l'entité catégorie "comment tu dois t'afficher en tant que string, en tant que chaîne de caractères et non pas en tant qu'objet)
     public function __toString()
     {
         return $this->name;

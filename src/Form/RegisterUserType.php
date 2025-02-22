@@ -17,16 +17,21 @@ use Symfony\Component\Validator\Constraints\Length;
 class RegisterUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
+    // permet de construire le formulaire (dans cette fonction j'ajoute plusieurs élément)
     {
         $builder
+            //(Les typage, mais uniquement pour les formulaire de symfony) type de forme que je souhaite affiché, EmailType c'est un champ, champ de texte qui est rendu à l'aide de la <input type="email">balise HTML5.(regarde dans la doc)
             ->add('email', EmailType::class, [
                 'label' => "Votre adresse email",
+                // attr (renseigné les attribues que je veux afficher dans mon input)
                 'attr' => [
+                    // placeholder (un texte indicatif)
                     'placeholder' => "Indiquez votre adresse email"
                 ]
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                // Je rajoute une contrainte et je lui donne un tableau ensuite je fait un new de l'objet de la contrainte que je veux choisir j'ai envie de faire une contrainte sur la longeur de chaine de caractére (voir la doc) je rajoute deux paramètre 
                 'constraints' => [
                     new Length([
                         'min' => 4,
@@ -38,6 +43,7 @@ class RegisterUserType extends AbstractType
                     'attr' => [
                     'placeholder' => "Choisissez votre mot de passe"
                     ],
+                    // cela me permet de transite le MDP saissie dans le formulaire jusqu'au controller de maniere cripte et encodé
                     'hash_property_path' => 'password'
             ],
                 'second_options' => [
@@ -46,6 +52,7 @@ class RegisterUserType extends AbstractType
                     'placeholder' => "Confirmez votre mot de passe"
                 ]
                 ],
+                // J'ai ajouté un nouvelle input (plainPassword) mais qui correspond a rien dans mon entity pck jusqu'à present dans mon entity j'avais un champs qui s'appellais password donc pour forcé symfony a ne pas allé cherche un champ qui correspond a un entity on utilise (mappes => false)c'est pour dire n'essaye pas de faire le lien entre l'entity et le champ que je te donne
                 'mapped' => false,
             ])
             ->add('firstname', TextType::class, [
@@ -75,7 +82,8 @@ class RegisterUserType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
                 'attr' => [
-                    'class' => 'btn btn-custom'
+                    // attribue class de bootstrap
+                    'class' => 'btn btn-custom w-100'
                 ]
             ])
         ;
@@ -84,6 +92,7 @@ class RegisterUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            // Cette contrainte vérifie une entré dans mon formulaire si elle est bien unique, dans mon tableau je specifie entity ensuite je notifie sur quel champ je veux que sa soie unique.
             'constraints' => [
                 new UniqueEntity([
                     'entityClass' => User::class,
