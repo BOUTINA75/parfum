@@ -19,30 +19,23 @@ class RegisterController extends AbstractController
     {
         // Je créer un nouveau user (variable) qui est un nouvelle objet user qui conrrespond à mon entité
         $user = new User();
-
         // cette variable la(user), je la passé en deuxiéme paramètre dans ma méthode createForm (je me suis servie pour créer un formulaire)
         $form = $this->createForm(RegisterUserType::class,$user);
         
         // écoute la request (ce que l'utilisateur soumet dans le formulaire)
         $form->handleRequest($request);
-
-
-        // si le formulaire est soumis alors :
-        // tu enregistrer les datas en bdd 
-        // tu envoies un message de confirmation du compte bien créé
  
         // verifie qu'il est soumie et valide (isSubmitted et isValid)
         if($form->isSubmitted() && $form->isValid()) {
+            
             // Jai besoin de mon orm ($entityManager), Insert moi cet utilisateur dans ma table(persist: pour figer les donné, flush: pour les enregistrés) persist a besoin d'un objet qu'est en lien avec l'entity
             $entityManager->persist($user);
             $entityManager->flush();
-            
 
             $this->addFlash(
                 'success',
                 "Votre compte est correctement créé, veuillez vous connecter."
             );
-
             // Envoie d'un email de confirmation d'inscription.
             $mail = new Mail();
             $vars = [

@@ -18,7 +18,6 @@ class Mail
                 $content = str_replace('{'.$key.'}', $var, $content);
             }
         }
-        
         $mj = new Client($_ENV['MJ_APIKEY_PUBLIC'], $_ENV['MJ_APIKEY_PRIVATE'], true, ['version' => 'v3.1']);
         $body = [
             'Messages' => [
@@ -42,7 +41,6 @@ class Mail
                 ]
             ]
         ];
-
         $mj->post(Resources::$Email, ['body' => $body]);
     }
 }

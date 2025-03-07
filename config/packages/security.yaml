@@ -37,7 +37,7 @@ security:
         # permet de déclaré un chemin une url qui contient une chain de caractére qui associré un role définie (si je veux accède à compte il faut que je soie un user) dés que compte se trouve dans URL vérifie le role de l'utilisateur (il doit etre un role_user)
         - { path: ^/compte, roles: ROLE_USER }
         - { path: ^/commande, roles: ROLE_USER }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

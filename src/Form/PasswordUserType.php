@@ -30,7 +30,7 @@ class PasswordUserType extends AbstractType
                 'type' => PasswordType::class,
                 'constraints' => [
                     new Length([
-                        'min' => 4,
+                        'min' => 12,
                         'max' => 30
                     ])
                 ],

@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterUserType extends AbstractType
@@ -27,14 +28,21 @@ class RegisterUserType extends AbstractType
                 'attr' => [
                     // placeholder (un texte indicatif)
                     'placeholder' => "Indiquez votre adresse email"
-                ]
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 2,
+                        'max' => 255
+                    ]),
+                    new Email(message: "Le format de l'email est invalide.")
+                ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 // Je rajoute une contrainte et je lui donne un tableau ensuite je fait un new de l'objet de la contrainte que je veux choisir j'ai envie de faire une contrainte sur la longeur de chaine de caractére (voir la doc) je rajoute deux paramètre 
                 'constraints' => [
                     new Length([
-                        'min' => 4,
+                        'min' => 12,
                         'max' => 30
                     ])
                 ],
